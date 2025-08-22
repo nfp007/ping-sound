@@ -1,0 +1,20 @@
+[Unit]
+Description=Bluetooth Ping Sound Service for Xiaomi Sound Pocket
+After=network.target bluetooth.target graphical-session.target
+Wants=bluetooth.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/ping-sound
+Restart=always
+RestartSec=10
+User=nfp
+Group=nfp
+WorkingDirectory=/home/nfp
+
+# Environment variables for audio
+Environment="PULSE_SERVER=unix:/run/user/1000/pulse/native"
+Environment="XDG_RUNTIME_DIR=/run/user/1000"
+
+[Install]
+WantedBy=multi-user.target
