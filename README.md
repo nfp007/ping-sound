@@ -3,6 +3,11 @@ Ping Sound service. It keeps the bluetooth speaker connected even without playin
 
 ## Here are the complete installation steps for your ping-sound service:
 
+Step 0: Compile if you want to change some parameters
+```
+go build -o ping-sound ping-sound.go
+```
+
 Step 1: Copy the binary to system location
 ```
 sudo cp /home/nfp/sound/ping-sound /usr/local/bin/
