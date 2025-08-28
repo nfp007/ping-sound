@@ -7,14 +7,14 @@ Ping Sound service. It keeps the bluetooth speaker connected even without playin
 
 ### Step 1: Copy the script and sound files to system locations
 ```sh
-sudo cp /home/nfp/git/ping-sound/ping-sound.sh /usr/local/bin/
+sudo cp ping-sound.sh /usr/local/bin/
 sudo chmod +x /usr/local/bin/ping-sound.sh
-sudo cp /home/nfp/git/ping-sound/ping.wav /usr/local/share/ping-sound/
+sudo cp ping.wav /usr/local/share/ping-sound/
 ```
 
 ### Step 2: Copy the service file to systemd
 ```sh
-sudo cp /home/nfp/git/ping-sound/ping-sound.service /etc/systemd/system/
+sudo cp ping-sound.service /etc/systemd/system/
 ```
 
 ### Step 3: Reload systemd and enable the service
