@@ -5,12 +5,11 @@ Wants=bluetooth.target
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/ping-sound
+ExecStart=/usr/local/bin/ping-sound.sh /usr/local/share/ping-sound/ping.wav
 Restart=always
 RestartSec=10
 User=nfp
 Group=nfp
-WorkingDirectory=/home/nfp
 
 # Environment variables for audio
 Environment="PULSE_SERVER=unix:/run/user/1000/pulse/native"

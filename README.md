@@ -1,50 +1,56 @@
 # ping-sound
 Ping Sound service. It keeps the bluetooth speaker connected even without playing audio.
 
-## Here are the complete installation steps for your ping-sound service:
+## Installation steps for your ping-sound service:
 
-Step 0: Compile if you want to change some parameters
-```
-go build -o ping-sound ping-sound.go
-```
+**Note:** This version uses a Bash script (`ping-sound.sh`) and does not require compiling a Go binary.
 
-Step 1: Copy the binary to system location
-```
-sudo cp /home/nfp/sound/ping-sound /usr/local/bin/
-sudo chmod +x /usr/local/bin/ping-sound
+### Step 1: Copy the script and sound files to system locations
+```sh
+sudo cp /home/nfp/git/ping-sound/ping-sound.sh /usr/local/bin/
+sudo chmod +x /usr/local/bin/ping-sound.sh
+sudo cp /home/nfp/git/ping-sound/ping.wav /usr/local/share/ping-sound/
 ```
 
-Step 2: Copy the service file to systemd
-```
-sudo cp /home/nfp/sound/ping-sound.service /etc/systemd/system/
+### Step 2: Copy the service file to systemd
+```sh
+sudo cp /home/nfp/git/ping-sound/ping-sound.service /etc/systemd/system/
 ```
 
-Step 3: Reload systemd and enable the service
-```
+### Step 3: Reload systemd and enable the service
+```sh
 sudo systemctl daemon-reload
 sudo systemctl enable ping-sound.service
 ```
 
-Step 4: Start the service (optional - to test immediately)
-```
+### Step 4: Start the service (optional - to test immediately)
+```sh
 sudo systemctl start ping-sound.service
 ```
 
-Step 5: Check service status
-```
+### Step 5: Check service status
+```sh
 sudo systemctl status ping-sound.service
 ```
 
-Step 6: View service logs (if needed)
-```
+### Step 6: View service logs (if needed)
+```sh
 sudo journalctl -u ping-sound.service -f
 ```
 
+---
 
 ## The service is configured to:
 
 - Start automatically after boot
 - Restart automatically if it crashes
-- Run as your user (nfp) to access audio properly
-- Have proper environment variables for PulseAudio
+- Run as your user (`nfp`) to access audio properly
+- Use proper environment variables for PulseAudio
 - After installation, the service will start automatically on every boot and monitor for your Xiaomi Sound Pocket device!
+
+---
+
+### Script details
+
+- The main logic is in [`ping-sound.sh`](ping-sound.sh), which checks if your Bluetooth device ("Xiaomi Sound Pocket") is connected and plays a ping sound every 30 seconds to keep it alive.
+- The systemd service [`ping-sound.service`](ping-sound.service) runs the script and passes the sound file as an argument.
